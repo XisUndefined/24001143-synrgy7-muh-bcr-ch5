@@ -1,8 +1,14 @@
 import "dotenv/config";
 import app from "./app.js";
+import { syncModels } from "./utils/sequelize.js";
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server listening to http://localhost:${port}`);
-});
+try {
+  await syncModels();
+  app.listen(port, () => {
+    console.log(`Server listening to http://localhost:${port}`);
+  });
+} catch (error) {
+  console.error("Failed to authenticate with database or sync: ", error);
+}

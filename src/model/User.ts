@@ -11,7 +11,6 @@ import {
   BeforeCreate,
   BeforeUpdate,
   BeforeValidate,
-  HasMany,
 } from "sequelize-typescript";
 import bcrypt from "bcrypt";
 import crypto from "node:crypto";
@@ -149,9 +148,6 @@ export class User extends Model<User> {
     field: "updated_at",
   })
   public updatedAt!: Date;
-
-  // @HasMany(() => Order)
-  // public orders?: Order[];
 
   @BeforeCreate
   static hashPassword = async (user: User) => {
